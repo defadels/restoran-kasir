@@ -289,7 +289,7 @@ if(!isset($_SESSION['user'])) {
 
     if($_GET['page'] == 'meja')
     {
-      include "meja/index.php";
+      include "meja/meja.php";
 
       if(isset($_GET['action'])){
         if($_GET['action'] == "add"){
@@ -303,7 +303,7 @@ if(!isset($_SESSION['user'])) {
     }
 
     else if($_GET['page'] == 'menu'){
-      include "menu/customer.php";
+      include "menu/menu.php";
 
       if(isset($_GET['action'])){
         if($_GET['action'] == "add"){
@@ -318,7 +318,7 @@ if(!isset($_SESSION['user'])) {
     }
 
     else if($_GET['page'] == 'pelanggan'){
-      include "pelanggan/index.php";
+      include "pelanggan/pelanggan.php";
 
       if(isset($_GET['action'])){
         if($_GET['action'] == "add"){
@@ -334,7 +334,7 @@ if(!isset($_SESSION['user'])) {
 
     
     else if($_GET['page'] == 'barang'){
-        include "barang/index.php";
+        include "barang/barang.php";
       
         if(isset($_GET['action'])){
             if($_GET['action'] == "add"){
@@ -349,7 +349,7 @@ if(!isset($_SESSION['user'])) {
 
 
     else if($_GET['page'] == 'transaksi'){
-        include "transaksi/index.php";
+        include "transaksi/transaksi.php";
       
         if(isset($_GET['action'])){
             if($_GET['action'] == "add"){
@@ -363,7 +363,7 @@ if(!isset($_SESSION['user'])) {
     }
    
     else if($_GET['page'] == 'pesanan'){
-        include "pesanan/index.php";
+        include "pesanan/pesanan.php";
       
         if(isset($_GET['action'])){
             if($_GET['action'] == "add"){
@@ -377,7 +377,7 @@ if(!isset($_SESSION['user'])) {
     }
    
     else if($_GET['page'] == 'laporan'){
-        include "laporan/index.php";
+        include "laporan/laporan.php";
       
         // if(isset($_GET['action'])){
         //     if($_GET['action'] == "add"){

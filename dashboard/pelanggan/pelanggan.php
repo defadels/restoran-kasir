@@ -4,12 +4,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Produk</h1>
+            <h1 class="m-0 text-dark">Pelanggan</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Produk</li>
+              <li class="breadcrumb-item active">Pelanggan</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -17,40 +17,12 @@
     </div>
     <!-- /.content-header -->
 
-    <?php
-        if(empty($_GET['alert'])) {
-            echo "";
-        } elseif ($_GET['alert'] == 1) {
-            echo "<div class='alert alert-success alert-dismissible'>
-            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-            <h5><i class='icon fas fa-check'></i> Sukses!</h5>
-            Data pelanggan berhasil disimpan.
-          </div>";
-        } elseif($_GET['alert'] == 2) {
-            echo "<div class='alert alert-success alert-dismissible'>
-            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-            <h5><i class='icon fas fa-check'></i> Sukses!</h5>
-            Data pelanggan berhasil diubah.
-          </div>";
-        } elseif($_GET['alert'] == 3) {
-            echo "<div class='alert alert-info alert-dismissible'>
-            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-            <h5><i class='icon fas fa-info'></i> Gagal!</h5>
-            Tidak masuk memasukkan data pelanggan.
-          </div>";
-        } elseif($_GET['alert'] == 4) {
-          echo "<div class='alert alert-success alert-dismissible'>
-          <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-          <h5><i class='icon fas fa-check'></i> Sukses!</h5>
-          Data pelanggan berhasil dihapus.
-        </div>";
-      }
-    ?>
+    <?php include 'layout/alert.php' ?>
 
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <a href="?page=product&action=add" class="btn btn btn-sm btn-primary mb-3">+ Tambah Data</a>
+        <a href="?page=pelanggan&action=add" class="btn btn btn-sm btn-primary mb-3">+ Tambah Data</a>
         <!-- Default box -->
         <div class="card">
               <div class="card-header">
@@ -72,7 +44,7 @@
                   
                   <?php
                   
-                  $daftar_produk = mysqli_query($conn, "SELECT * FROM produk") or die(mysqli_error());
+                  $daftar_pelanggan = mysqli_query($conn, "SELECT * FROM pelanggan") or die(mysqli_error());
 
                   foreach($daftar_pelanggan as $pelanggan) :
                   
@@ -84,8 +56,8 @@
                     <td><?php echo $pelanggan['Nohp'] ?></td>
                     <td><?php echo $pelanggan['Alamat'] ?></td>
                     <td>
-                        <a href="?page=pelanggan&action=edit&id=<?php echo $pelanggan['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                        <a onclick="return confirm('Yakin hapus data?')" href="?page=pelanggan&action=delete&id=<?php echo $pelanggan['id']; ?>" class="btn btn-danger btn-sm">Hapus</a>
+                        <a href="?page=pelanggan&action=edit&id=<?php echo $pelanggan['idpelanggan']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <a onclick="return confirm('Yakin hapus data?')" href="?page=pelanggan&action=delete&id=<?php echo $pelanggan['idpelanggan']; ?>" class="btn btn-danger btn-sm">Hapus</a>
                     </td>
                   </tr>
                   <?php endforeach; ?>
