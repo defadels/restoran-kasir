@@ -387,17 +387,11 @@ if(!isset($_SESSION['user'])) {
    
     else if($_GET['page'] == 'laporan'){
         include "laporan/laporan.php";
-      
-        // if(isset($_GET['action'])){
-        //     if($_GET['action'] == "add"){
-        //       include "pesanan/add.php";
-        //     }elseif($_GET['action'] == "edit"){
-        //       include "pesanan/edit.php";
-        //     }elseif($_GET['action'] == "delete"){
-        //       include "pesanan/delete.php";
-        //     }
-        //   }
     }
+
+    else if($_GET['page'] == 'exportpdf'){
+      include "laporan/exportpdf.php";
+  }
 
   } else {
     include "dashboard.php";
