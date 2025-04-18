@@ -26,7 +26,7 @@
         <!-- Default box -->
         <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Tabel data produk</h3>
+                <h3 class="card-title">Tabel data pelanggan</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

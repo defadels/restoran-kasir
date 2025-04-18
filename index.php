@@ -125,7 +125,7 @@ if(isset($_POST['submit'])){
     } else {
 
         echo "<script>alert('Gagal melakukan login, coba lagi!');</script>";
-        echo "<script>location.href='../../index.php';</script>";
+        echo "<script>location.href='index.php';</script>";
     }
     
 }
