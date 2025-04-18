@@ -189,7 +189,7 @@ if(!isset($_SESSION['user'])) {
            
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="?page=barang" class="nav-link <?php if(isset($_GET['page'])){ if($_GET['page'] == 'barang'){ echo'active';  } else { echo ''; } } ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -197,7 +197,7 @@ if(!isset($_SESSION['user'])) {
               </p>
             </a>
            
-          </li>
+          </li> -->
 
 
             <?php } ?>
@@ -205,7 +205,7 @@ if(!isset($_SESSION['user'])) {
 
             <?php if($_SESSION['user']['role'] === 'waiter'){  ?>
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
             <a href="?page=barang" class="nav-link <?php if(isset($_GET['page'])){ if($_GET['page'] == 'barang'){ echo'active';  } else { echo ''; } } ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -213,7 +213,7 @@ if(!isset($_SESSION['user'])) {
               </p>
             </a>
            
-          </li>
+          </li> -->
 
                 
           <li class="nav-item">
