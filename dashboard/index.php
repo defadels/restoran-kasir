@@ -271,6 +271,15 @@ if(!isset($_SESSION['user'])) {
           </li>
     
             <?php } ?>
+
+
+            <li class="nav-header">Auth</li>
+          <li class="nav-item">
+            <a onclick="return confirm('Mau logout?')" href="auth/logout.php" confirm="" class="nav-link">
+              <i class="nav-icon fas fa-power-off"></i>
+              <p>Logout</p>
+            </a>
+          </li>
      
   
         </ul>

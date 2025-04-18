@@ -64,14 +64,14 @@ if(isset($_POST['submit'])) {
 
     $nomor_meja = $_POST['nomor_meja'];
 
-  $query = mysqli_query($conn,"UPDATE pelanggan SET nomor_meja = '$nomor_meja',
+  $query = mysqli_query($conn,"UPDATE meja SET nomor_meja = '$nomor_meja',
                                                 WHERE idmeja = '$id'") or die(mysqli_error());
 
       if($query)
       {
       ?>    
       <script>
-          window.location.href="?page=pelanggan&alert=2";
+          window.location.href="?page=meja&alert=2";
       </script>
       <?php   
       }
