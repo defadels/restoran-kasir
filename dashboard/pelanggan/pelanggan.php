@@ -52,7 +52,14 @@
                   
                   <tr>
                     <td><?php echo $pelanggan['Namapelanggan'] ?></td>
-                    <td><?php echo $pelanggan['Jeniskelamin'] ?></td>
+                    <td><?php 
+                      if($pelanggan['Jeniskelamin'] == 0) {
+                        echo 'Pria';
+                      } else {
+                        echo 'Wanita';
+                      }
+                    
+                    ?></td>
                     <td><?php echo $pelanggan['Nohp'] ?></td>
                     <td><?php echo $pelanggan['Alamat'] ?></td>
                     <td>

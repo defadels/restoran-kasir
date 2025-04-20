@@ -25,8 +25,13 @@
               </div>
               <!-- /.card-header -->
                <!-- form start -->
-               <form role="form" method="POST">
+               <form role="form" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
+
+                <div class="form-group">
+                    <label for="">Foto Menu</label>
+                    <input type="file" name="foto" class="form-control">
+                </div>
 
                 <div class="form-group">
                     <label for="">Nama Menu</label>
@@ -70,8 +75,29 @@ if(isset($_POST['submit'])) {
     $Namamenu = $_POST['Namamenu'];
     $harga = $_POST['harga'];
 
+
+  
+    $query_show = mysqli_query($conn, "SELECT * FROM menu WHERE idmenu='$id'")or die(mysqli_error($conn));
+
+    $data_lama = $query_show->fetch_assoc();
+
+    if($_FILES['foto']['name'] == null){
+        
+        $foto = $data_lama['foto'];
+
+    } else {
+
+        $foto = $_FILES['foto']['name'];
+        unlink("../assets/menu/".$data_lama['foto']);
+
+        $lokasi = $_FILES['foto']['tmp_name'];
+        move_uploaded_file($lokasi, "../assets/menu/".$foto);
+
+    }
+
   $query = mysqli_query($conn,"UPDATE menu SET Namamenu = '$Namamenu',
-                                                harga = '$harga'
+                                                harga = '$harga',
+                                                foto = '$foto'
                                                 WHERE idmenu = '$id'") or die(mysqli_error());
 
       if($query)

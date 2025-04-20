@@ -205,7 +205,7 @@ if(!isset($_SESSION['user'])) {
 
             <?php if($_SESSION['user']['role'] === 'waiter'){  ?>
 
-                <!-- <li class="nav-item">
+                <li class="nav-item">
             <a href="?page=barang" class="nav-link <?php if(isset($_GET['page'])){ if($_GET['page'] == 'barang'){ echo'active';  } else { echo ''; } } ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -213,7 +213,7 @@ if(!isset($_SESSION['user'])) {
               </p>
             </a>
            
-          </li> -->
+          </li>
 
                 
           <li class="nav-item">
@@ -259,12 +259,12 @@ if(!isset($_SESSION['user'])) {
 
         <?php } ?>
 
-        <?php if(isset($_SESSION['user']['role']) === 'owner'){  ?>
+        <?php if($_SESSION['user']['role'] === 'owner'){  ?>
             
 
             <li class="nav-header">Dokumen</li>
           <li class="nav-item">
-            <a href="?page=profile" class="nav-link <?php if(isset($_GET['page'])) { if($_GET['page'] == 'profile') { echo'active'; } else { echo ''; } } ?>">
+            <a href="?page=laporan" class="nav-link <?php if(isset($_GET['page'])) { if($_GET['page'] == 'laporan') { echo'active'; } else { echo ''; } } ?>">
               <i class="nav-icon fas fa-file"></i>
               <p>Generate Laporan</p>
             </a>
@@ -457,7 +457,36 @@ if(!isset($_SESSION['user'])) {
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 <script>
+
+    var bulan_produksi = <?php echo json_encode($label_pesanan); ?>;
+    var jumlah_pesanan = <?php echo $encoded_data; ?>;
+
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: bulan_produksi,
+      datasets: [{
+        label: 'Penjualan',
+        data: jumlah_pesanan,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
   $(function () {
     $("#example1").DataTable({
       "responsive": true,

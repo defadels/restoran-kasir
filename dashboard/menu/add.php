@@ -18,8 +18,13 @@
               </div>
               <!-- /.card-header -->
                <!-- form start -->
-               <form role="form" method="POST">
+               <form role="form" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
+
+                <div class="form-group">
+                    <label for="">Foto Menu</label>
+                    <input type="file" name="foto" class="form-control">
+                </div>
 
                 <div class="form-group">
                     <label for="">Nama Menu</label>
@@ -57,8 +62,12 @@
     $Namamenu = $_POST['Namamenu'];
     $harga = $_POST['harga'];
 
-    $query = mysqli_query($conn,"INSERT INTO menu(Namamenu, harga)
-                          VALUES('$Namamenu','$harga')") or die(mysqli_error());
+    $foto 			= $_FILES['foto']['name'];
+    $lokasi			= $_FILES['foto']['tmp_name'];
+    move_uploaded_file($lokasi, "../assets/menu/".$foto);
+
+    $query = mysqli_query($conn,"INSERT INTO menu(Namamenu, harga, foto)
+                          VALUES('$Namamenu','$harga','$foto')") or die(mysqli_error());
 
         if($query)
         {

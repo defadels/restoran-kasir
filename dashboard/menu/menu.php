@@ -33,7 +33,9 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                    <th style="width: 20%">Foto</th>
                     <th>Nomor Meja</th>
+                    <th>Harga</th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
@@ -48,6 +50,7 @@
                   ?>
                   
                   <tr>
+                    <td> <img src="../assets/menu/<?php echo $menu['foto'] ?>" style="width: 50%" alt=""> </td>
                     <td><?php echo $menu['Namamenu'] ?></td>
                     <td>Rp.<?php echo number_format($menu['harga']) ?></td>
                     <td>

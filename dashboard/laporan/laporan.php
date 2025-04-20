@@ -35,11 +35,10 @@
                 <thead class="thead-dark">
                     <tr>
                     <th>Tanggal</th>
+                    <th>Invoice</th>
+                    <th>Nomor Meja</th>
                     <th>Nama Pelanggan</th>
-                    <th>Nama Menu</th>
-                    <th>Jumlah</th>
-                    <th>Harga</th>
-                    <th>Subtotal</th>
+                    <th>Total</th>
                     <th>Status</th>
                     </tr>
                 </thead>
@@ -47,40 +46,31 @@
                     <?php 
                     $query = mysqli_query($conn, "
                       SELECT 
-                        p.tanggal,
-                        pel.Namapelanggan,
-                        m.Namamenu,
-                        d.jumlah,
-                        d.hargasatuan AS harga,
-                        (d.jumlah * d.hargasatuan) AS subtotal,
-                        p.status
-                      FROM pesanan p
-                      JOIN pelanggan pel ON p.idpelanggan = pel.idpelanggan
-                      JOIN pesanandetail d ON p.idpesanan = d.idpesanan
-                      JOIN menu m ON d.idmenu = m.idmenu
-                      ORDER BY p.tanggal DESC
+                        pesanan.tanggal,
+                        pelanggan.Namapelanggan,
+                        meja.nomor_meja,
+                        pesanan.invoice,
+                        pesanan.total,
+                        pesanan.status
+                      FROM pesanan
+                      JOIN pelanggan ON pesanan.idpelanggan = pelanggan.idpelanggan
+                      JOIN meja ON pesanan.idmeja = meja.idmeja
+                      ORDER BY tanggal DESC
                     ");
-                    
-                    $total = 0;
                 
                     
                     
                     while($row = mysqli_fetch_assoc($query)): ?>
                     <tr>
                         <td><?= $row['tanggal'] ?></td>
+                        <td><?= $row['invoice'] ?></td>
+                        <td><?= $row['nomor_meja'] ?></td>
                         <td><?= $row['Namapelanggan'] ?></td>
-                        <td><?= $row['Namamenu'] ?></td>
-                        <td><?= $row['jumlah'] ?></td>
-                        <td>Rp<?= number_format($row['harga']) ?></td>
-                        <td>Rp<?= number_format($row['subtotal']) ?></td>
+                        <td>Rp<?= number_format($row['total']) ?></td>
                         <td><?= $row['status'] ?></td>
                     </tr>
-                    <?php $total += $row['subtotal']; ?>
                     <?php endwhile; ?>
-                    <tr>
-                    <td colspan="5" class="text-right font-weight-bold">Total</td>
-                    <td colspan="2" class="font-weight-bold">Rp<?= number_format($total) ?></td>
-                    </tr>
+                   
                 </tbody>
                 </table>
 
