@@ -129,7 +129,7 @@
 
                 <div class="form-group">
                     <label>Total: </label>
-                    <h4 id="totalHarga">Rp. <?= $pesanan['total'] ?></h4>
+                    <h4 id="totalHarga">Rp. 0</h4>
                 </div>
 
                 <!-- <input type="number" name="total" id="inputTotal" value=""> -->
@@ -158,6 +158,18 @@ if(isset($_POST['update'])) {
     $idmeja = $_POST['idmeja'];
     $status = $_POST['status'];
     $total = isset($_POST['total']) ? intval($_POST['total']) : 0;
+
+    if(isset($_POST['idmenu'])) {
+        foreach($_POST['idmenu'] as $idmenu) {
+            $jumlah = $_POST['jumlah'][$idmenu] ?? 1;
+
+            $result = mysqli_query($conn, "SELECT harga FROM menu WHERE idmenu = '$idmenu'");
+            $data = mysqli_fetch_assoc($result);
+            $hargasatuan = $data['harga'];
+
+           $total += $hargasatuan * $jumlah;
+        }
+    }
 
     // Update pesanan
     $updatePesanan = mysqli_query($conn, "UPDATE pesanan 

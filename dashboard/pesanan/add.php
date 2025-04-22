@@ -186,7 +186,21 @@ if(isset($_POST['submit'])) {
     $iduser = $_SESSION['user']['iduser']; // Pastikan session tersedia
     $tanggal = date('Y-m-d');
     $status = 'diproses';
-    $total = isset($_POST['total']) ? intval($_POST['total']) : 0;
+    $total = 0;
+
+    if(isset($_POST['idmenu'])) {
+      foreach($_POST['idmenu'] as $idmenu) {
+          $jumlah = $_POST['jumlah'][$idmenu] ?? 1;
+
+          // Ambil harga menu dari DB
+          $result = mysqli_query($conn, "SELECT harga FROM menu WHERE idmenu = '$idmenu'");
+          $dataMenu = mysqli_fetch_assoc($result);
+          $hargasatuan = $dataMenu['harga'];
+
+         $total += $hargasatuan * $jumlah;
+      }
+  }
+
 
     // Simpan ke tabel pesanan
     $queryPesanan = mysqli_query($conn, "INSERT INTO pesanan (idpelanggan, idmeja, iduser, tanggal, invoice, status, total) 

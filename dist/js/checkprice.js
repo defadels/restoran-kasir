@@ -1,35 +1,35 @@
 function hitungTotal() {
   let total = 0;
+  const checkboxes = document.querySelectorAll('input[name="idmenu[]"]');
 
-  // Loop all checkboxes
-  document.querySelectorAll('input[name="idmenu[]"]').forEach((cb) => {
-    if (cb.checked) {
-      const idmenu = cb.value;
-      const harga = parseInt(cb.getAttribute("data-harga")) || 0;
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      const idmenu = checkbox.value;
+      const harga = parseInt(checkbox.dataset.harga);
       const jumlahInput = document.querySelector(`input[name="jumlah[${idmenu}]"]`);
-      const jumlah = parseInt(jumlahInput?.value) || 0;
+      const jumlah = parseInt(jumlahInput.value) || 0;
 
       total += harga * jumlah;
     }
   });
 
-  // Set the total
-  document.getElementById("totalHarga").textContent = "Rp. " + total.toLocaleString("id-ID");
-  document.getElementById("inputTotal").value = Number(total);
+  // Update total display
+  const totalDisplay = document.getElementById("totalHarga");
+  totalDisplay.textContent = "Rp. " + total.toLocaleString("id-ID");
 
-  // console.log(total);
+  // Update hidden input
+  const inputTotal = document.getElementById("inputTotal");
+  inputTotal.value = total;
 }
 
-// Run total calculation when page is loaded
-document.addEventListener("DOMContentLoaded", function () {
-  hitungTotal();
-
-  // Attach event listeners after DOM is ready
-  document.querySelectorAll('input[name="idmenu[]"]').forEach((cb) => {
-    cb.addEventListener("change", hitungTotal);
-  });
-
-  document.querySelectorAll('input[name="jumlah[]"]').forEach((input) => {
-    input.addEventListener("change", hitungTotal);
-  });
+// Trigger update on checkbox or jumlah input change
+document.querySelectorAll('input[name="idmenu[]"]').forEach((cb) => {
+  cb.addEventListener("change", hitungTotal);
 });
+
+document.querySelectorAll('input[name^="jumlah"]').forEach((input) => {
+  input.addEventListener("input", hitungTotal);
+});
+
+// Run on load
+document.addEventListener("DOMContentLoaded", hitungTotal);
