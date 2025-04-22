@@ -34,7 +34,7 @@
                   <thead>
                   <tr>
                     <th>No</th>
-                    <th>ID Pesanan</th>
+                    <th>Invoice Pesanan</th>
                     <th>Tanggal</th>
                     <th>Total</th>
                     <th>Bayar</th>
@@ -46,14 +46,14 @@
                   
                   <?php
                   
-                  $daftar_transaksi = mysqli_query($conn, "  SELECT t.*, p.idpelanggan
+                  $daftar_transaksi = mysqli_query($conn, "  SELECT t.*, p.*
                   FROM transaksi t JOIN pesanan p ON t.idpesanan = p.idpesanan
                 ");;
                   ?>
                    <?php $no = 1; foreach ($daftar_transaksi as $d): ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $d['idpesanan'] ?></td>
+                        <td><?= $d['invoice'] ?></td>
                         <td><?= $d['tanggal'] ?></td>
                         <td>Rp<?= number_format($d['Total']) ?></td>
                         <td>Rp<?= number_format($d['Bayar']) ?></td>

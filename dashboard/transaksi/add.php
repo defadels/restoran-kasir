@@ -23,32 +23,47 @@
                     <form method="POST">
                     <div class="form-group">
                         <label>ID Pesanan</label>
-                        <select name="idpesanan" class="form-control">
+                        <select name="idpesanan" id="idpesanan" class="form-control">
                         <option value="">Pilih pesanan</option>
                         <?php
 
                             $pesanan = mysqli_query($conn, "SELECT * FROM pesanan WHERE status = 'dibayar' ");
 
+                            
 
-                            // $pesanan = mysqli_query($conn, "SELECT idpesanan FROM pesanan WHERE status='dibayar'");
                             while($row = mysqli_fetch_assoc($pesanan)): 
                             
                         ?>
                          
-                            <option value="<?= $row['idpesanan'] ?>"><?= $row['idpesanan'] ?> - Rp<?= number_format($row['total']) ?></option>
+                            <option value="<?= $row['idpesanan'] ?>"><?= $row['invoice'] ?></option>
 
                         <?php endwhile; ?>
                         </select>
                     </div>
 
                     <div class="form-group">
+                        <label>Nomor meja</label>
+                        <input type="text" name="nomor_meja" id="nomor_meja" class="form-control" readonly required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nama Pelanggan</label>
+                        <input type="text" name="Namapelanggan" id="namapelanggan" class="form-control" readonly required>
+                    </div>
+
+                    <div class="form-group">
                         <label>Total</label>
-                        <input type="number" name="Total" class="form-control" required>
+                        <input type="number" name="Total" id="total"  class="form-control" readonly required>
                     </div>
 
                     <div class="form-group">
                         <label>Bayar</label>
-                        <input type="number" name="Bayar" class="form-control" required>
+                        <input type="number" name="Bayar" id="bayar" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kembalian</label>
+                        <input type="number" name="Kembalian" id="kembalian" class="form-control" readonly required>
                     </div>
 
                     <button name="submit" class="btn btn-primary">Simpan</button>
@@ -69,10 +84,12 @@
 if (isset($_POST['submit'])) {
     $idpesanan = $_POST['idpesanan'];
     $tanggal = date('Y-m-d');
+    $nomormeja = $_POST['nomor_meja'];
+    $namapelanggan = $_POST['Namapelanggan'];
     $total = $_POST['Total'];
     $bayar = $_POST['Bayar'];
-    $kembalian = $bayar - $total;
-  
+    $kembalian = $_POST['Kembalian'];
+
     $insert = mysqli_query($conn, "INSERT INTO transaksi (idpesanan, tanggal, Total, Bayar, Kembalian) VALUES ('$idpesanan', '$tanggal', '$total', '$bayar', '$kembalian')");
   
     if ($insert) {
