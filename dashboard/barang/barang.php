@@ -22,7 +22,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <a href="?page=menu&action=add" class="btn btn btn-sm btn-primary mb-3">+ Tambah Data</a>
+        <a href="?page=barang&action=add" class="btn btn btn-sm btn-primary mb-3">+ Tambah Data</a>
         <!-- Default box -->
         <div class="card">
               <div class="card-header">
@@ -54,8 +54,8 @@
                     <td><?php echo $menu['Namamenu'] ?></td>
                     <td>Rp.<?php echo number_format($menu['harga']) ?></td>
                     <td>
-                        <a href="?page=menu&action=edit&id=<?php echo $menu['idmenu']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                        <a onclick="return confirm('Yakin hapus data?')" href="?page=menu&action=delete&id=<?php echo $menu['idmenu']; ?>" class="btn btn-danger btn-sm">Hapus</a>
+                        <a href="?page=barang&action=edit&id=<?php echo $menu['idmenu']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <a onclick="return confirm('Yakin hapus data?')" href="?page=barang&action=delete&id=<?php echo $menu['idmenu']; ?>" class="btn btn-danger btn-sm">Hapus</a>
                     </td>
                   </tr>
                   <?php endforeach; ?>

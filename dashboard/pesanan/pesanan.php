@@ -37,6 +37,7 @@
                     <th>Nama Pelanggan</th>
                     <th>Nomor Meja</th>
                     <th>Dibuat Oleh</th>
+                    <th>Total</th>
                     <th>Status</th>
                     <th>Aksi</th>
                   </tr>
@@ -45,7 +46,7 @@
                   
                   <?php
                   
-                  $daftar_pesanan = mysqli_query($conn, "SELECT pelanggan.Namapelanggan, meja.nomor_meja, user.Namauser, pesanan.tanggal, pesanan.idpesanan, pesanan.status FROM pesanan
+                  $daftar_pesanan = mysqli_query($conn, "SELECT pelanggan.Namapelanggan, meja.nomor_meja, user.Namauser, pesanan.tanggal, pesanan.idpesanan, pesanan.total, pesanan.status FROM pesanan
                   INNER JOIN pelanggan ON pesanan.idpelanggan = pelanggan.idpelanggan
                   INNER JOIN meja ON pesanan.idmeja = meja.idmeja
                   INNER JOIN user ON pesanan.iduser = user.iduser") or die(mysqli_error());
@@ -59,9 +60,11 @@
                     <td><?php echo $pesanan['Namapelanggan'] ?></td>
                     <td><?php echo $pesanan['nomor_meja'] ?></td>
                     <td><?php echo $pesanan['Namauser'] ?></td>
-                    <td><?php echo $pesanan['status'] ?></td>
+                    <td>Rp.<?php echo number_format($pesanan['total']) ?></td>
+                    <td><?php echo ucfirst($pesanan['status']) ?></td>
                     <td>
                         <a href="?page=pesanan&action=edit&id=<?php echo $pesanan['idpesanan']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="?page=pesanan&action=show&id=<?php echo $pesanan['idpesanan']; ?>" class="btn btn-info btn-sm">Show</a>
                         <a onclick="return confirm('Yakin hapus data?')" href="?page=pesanan&action=delete&id=<?php echo $pesanan['idpesanan']; ?>" class="btn btn-danger btn-sm">Hapus</a>
                     </td>
                   </tr>

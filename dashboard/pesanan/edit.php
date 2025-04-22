@@ -31,6 +31,14 @@
                 <input type="hidden" name="idpesanan" value="<?= $idpesanan ?>">
 
             <div class="card-body">
+
+            
+            <div class="form-group">
+                    <label for="">Invoice</label>
+                    <input type="text" name="invoice" value="<?php echo $pesanan['invoice']; ?>" class="form-control" readonly>
+                </div>
+
+                
                 <div class="form-group">
                     <label>Nama Pelanggan</label>
                     <select name="idpelanggan" required class="form-control">
@@ -61,20 +69,50 @@
 
                 <div class="form-group">
                     <label>Pilih Menu</label>
+                    <table class="table table-bordered">
+                                  <thead>
+                                    <tr>
+                                      <th width="150px">Pilih</th>
+                                      <th width="450px">Nama Menu</th>
+                                      <th>Harga</th>
+                                      <th width="200px">Jumlah</th>
+                                    </tr>
+                                  </thead>
+                    <tbody>
                     <?php
                     $menu = mysqli_query($conn, "SELECT * FROM menu");
                     foreach($menu as $m):
                     $checked = isset($pesanan_detail[$m['idmenu']]) ? 'checked' : '';
                     $jumlah = $checked ? $pesanan_detail[$m['idmenu']]['Jumlah'] : '';
                     ?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="idmenu[]" value="<?= $m['idmenu'] ?>" id="menu<?= $m['idmenu'] ?>" <?= $checked ?>>
-                        <label class="form-check-label" for="menu<?= $m['idmenu'] ?>">
-                        <?= $m['Namamenu'] ?> - Rp<?= number_format($m['harga']) ?>
-                        </label>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                            <input style="width:60%;" class="form-check-input" type="checkbox" name="idmenu[]" value="<?= $m['idmenu'] ?>" id="menu<?= $m['idmenu'] ?>" data-harga="<?= $m['harga'] ?>" <?= $checked ?> >
+                            </div>
+                            </td>
+                        <td>
+                            <img src="../assets/menu/<?= $m['foto'] ?>" style="width: 10%" alt="">
+                            <label class="form-check-label" for="menu<?= $m['idmenu'] ?>">
+                                    <?= $m['Namamenu'] ?> 
+                            </label>
+                        </td>
+                        <td>
+                             Rp<?= number_format($m['harga']) ?>
+                        </td>
+                        <td>
                         <input type="number" name="jumlah[<?= $m['idmenu'] ?>]" class="form-control mt-1" value="<?= $jumlah ?>" placeholder="Jumlah" min="1">
-                    </div>
+                        </td>
+                    <!-- <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="idmenu[]" value="<?= $m['idmenu'] ?>" id="menu<?= $m['idmenu'] ?>" <?= $checked ?>>
+                        
+                        
+                    </div> -->
+                    </tr>
                     <?php endforeach; ?>
+
+                    </tbody>
+                    </table>
                 </div>
 
                 <div class="form-group">
@@ -86,6 +124,15 @@
                         <option <?php if($pesanan['status'] == 'dibayar') { echo 'selected'; } ?> value="dibayar">Dibayar</option>
                     </select>
                 </div>
+
+               
+
+                <div class="form-group">
+                    <label>Total: </label>
+                    <h4 id="totalHarga">Rp. <?= $pesanan['total'] ?></h4>
+                </div>
+
+                <!-- <input type="number" name="total" id="inputTotal" value=""> -->
 
                 <div class="card-footer">
                     <button name="update" type="submit" class="btn btn-success">Update</button>
@@ -110,10 +157,11 @@ if(isset($_POST['update'])) {
     $idpelanggan = $_POST['idpelanggan'];
     $idmeja = $_POST['idmeja'];
     $status = $_POST['status'];
+    $total = isset($_POST['total']) ? intval($_POST['total']) : 0;
 
     // Update pesanan
     $updatePesanan = mysqli_query($conn, "UPDATE pesanan 
-                        SET idpelanggan='$idpelanggan', idmeja='$idmeja', status='$status' 
+                        SET idpelanggan='$idpelanggan', idmeja='$idmeja', status='$status', total='$total'
                         WHERE idpesanan='$idpesanan'");
 
     if($updatePesanan) {

@@ -49,6 +49,11 @@ if(!isset($_SESSION['user'])) {
   <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
+
+  <!-- Select2 -->
+  <link rel="stylesheet" href="../plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -381,6 +386,8 @@ if(!isset($_SESSION['user'])) {
               include "pesanan/edit.php";
             }elseif($_GET['action'] == "delete"){
               include "pesanan/delete.php";
+            }elseif($_GET['action'] == "show"){
+              include "pesanan/show.php";
             }
           }
     }
@@ -450,6 +457,8 @@ if(!isset($_SESSION['user'])) {
 <script src="../plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+<script src="../plugins/select2/js/select2.full.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -457,8 +466,10 @@ if(!isset($_SESSION['user'])) {
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
 
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<script src="../dist/js/checkprice.js"></script>
 
 <script>
 
@@ -486,12 +497,19 @@ if(!isset($_SESSION['user'])) {
     }
   });
 
+  $(document).ready(function() {
+        $('#js-example-basic-single').select2();
+    });
+
 
   $(function () {
+    $('.select2').select2()
+
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
     });
+
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
@@ -502,6 +520,8 @@ if(!isset($_SESSION['user'])) {
       "responsive": true,
     });
   });
+
+
 </script>
 
 </body>
